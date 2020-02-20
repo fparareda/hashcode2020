@@ -26,7 +26,7 @@ public class Writer {
     //repeat per library
 
 //    idLibrary, listOfBooksId
-    public void print (Map<Integer, ArrayList<Integer>> result)
+    public void print (HashMap<Integer, ArrayList<Integer>> result)
     {
         int numberOfSignedUpLibraries = result.keySet().size();
         int numberOfBooksToScan;
