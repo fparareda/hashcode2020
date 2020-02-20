@@ -11,7 +11,7 @@ public class Writer {
     //repeat per library
 
 //    idLibrary, listOfBooksId
-    public void print (Map<Integer, List<Integer>> result)
+    public void print (Map<Integer, ArrayList<Integer>> result)
     {
         PrintWriter printer;
         int numberOfSignedUpLibraries = result.keySet().size();
@@ -20,12 +20,12 @@ public class Writer {
         printer = createPrinter();
         printer.println(numberOfSignedUpLibraries);
         for (Integer libraryId : result.keySet()) {
-//            listOfBookIds = result.get(libraryId);
-//            numberOfBooksToScan = listOfBookIds.length;
-//            printer.println(libraryId + " " + numberOfBooksToScan);
-//            for (int bookId : listOfBookIds)
-//                printer.print(bookId+" ");
-//            printer.println();
+            listOfBookIds = result.get(libraryId);
+            numberOfBooksToScan = listOfBookIds.length;
+            printer.println(libraryId + " " + numberOfBooksToScan);
+            for (int bookId : listOfBookIds)
+                printer.print(bookId+" ");
+            printer.println();
         }
         printer.close();
     }
