@@ -13,8 +13,8 @@ import java.util.List;
 import java.util.Map;
 
 public class Parser {
+
     private Map<Integer, Integer> scores = new HashMap<>();
-    private Summary summary;
     private List<Library> libraries;
 
     public void execute(String input, String output) {
@@ -22,7 +22,7 @@ public class Parser {
 
         LibraryService libraryService = new LibraryService();
         libraryService.storeList(output, libraries, this.scores);
-        System.out.println("Acabado " + input);
+        System.out.println("Acabado " + input + ", leidas " + libraries.size() + " libraries.");
     }
 
     public void readFile(String file)
@@ -45,12 +45,6 @@ public class Parser {
             String[] valuesFirstLine = firstLine.split(" ");
 
             int numberOfLibraries = Integer.parseInt(valuesFirstLine[1]);
-
-            summary = new Summary(
-                    Integer.parseInt(valuesFirstLine[0]),
-                    Integer.parseInt(valuesFirstLine[1]),
-                    Integer.parseInt(valuesFirstLine[2])
-                    );
 
             String secondLine = lines.get(1);
             String[] valuesSecondLine = secondLine.split(" ");

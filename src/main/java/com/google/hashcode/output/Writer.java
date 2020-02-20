@@ -29,7 +29,6 @@ public class Writer {
     public void print (Map<Integer, List<Integer>> result)
     {
         int numberOfSignedUpLibraries = result.keySet().size();
-        int numberOfBooksToScan;
         List<Integer> listOfBookIds;
 
         printer.println(numberOfSignedUpLibraries);

@@ -10,12 +10,15 @@ public class LibraryService {
     private final static Double SCORING_NUM_BOOKS = 0.1;
     private final static Double SCORING_SIGNUP_DAYS = 0.9;
     private final static Double SCORING_SCAN_DAYS = 0.9;
-    private List<Integer> booksInTotal = new ArrayList<>();
 
     public void storeList(String output, List<Library> libraries, Map<Integer, Integer> scores) {
         Writer writer = new Writer(output);
         Map<Integer, List<Integer>> map = new HashMap<>();
         List<LibraryScoring> librariesSorted = getListScoring(libraries, scores);
+
+        double value = librariesSorted.size() * 0.2;
+        librariesSorted = librariesSorted.subList(0, ((Long)Math.round(value)).intValue());
+
         for(LibraryScoring libraryScoring : librariesSorted) {
             map.put(libraryScoring.getLibraryId(), libraryScoring.getOrderedBooks());
         }
@@ -27,21 +30,14 @@ public class LibraryService {
                 .map(library -> getLibraryScoring(scores, library))
                 .collect(Collectors.toList());
 
-        Collections.sort(orderedLibraries, new Comparator<LibraryScoring>() {
-            @Override
-            public int compare(LibraryScoring b1, LibraryScoring b2) {
-                return b2.getScoring().compareTo(b1.getScoring());
-            }
-        });
+        Collections.sort(orderedLibraries, (b1, b2) -> b2.getScoring().compareTo(b1.getScoring()));
         return orderedLibraries;
     }
 
     private LibraryScoring getLibraryScoring(Map<Integer, Integer> scores, Library library) {
         return new LibraryScoring(library.getLibraryId(),
                 library.getBooks(),
-                calculateScore(library.getBooks(), scores) * SCORING_NUM_BOOKS
-                + library.getSignupDays() * SCORING_SIGNUP_DAYS
-                + library.getBooksToScanDays() * SCORING_SCAN_DAYS);
+                Double.valueOf(calculateScore(library.getBooks(), scores)));
     }
     private Integer calculateScore(List<Book> books, Map<Integer, Integer> scores){
         return books.parallelStream()
