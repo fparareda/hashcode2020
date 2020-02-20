@@ -1,16 +1,20 @@
 package com.google.hashcode.model;
 
+import java.util.List;
+
 public class Library {
     private Integer libraryId;
     private Integer numBooks;
     private Integer signupDays;
     private Integer booksToScanDays;
+    private List<Book> books;
 
-    public Library(Integer libraryId, Integer numBooks, Integer signupDays, Integer booksToScanDays) {
+    public Library(Integer libraryId, Integer numBooks, Integer signupDays, Integer booksToScanDays, List<Book> books) {
         this.libraryId = libraryId;
         this.numBooks = numBooks;
         this.signupDays = signupDays;
         this.booksToScanDays = booksToScanDays;
+        this.books = books;
     }
 
     public Integer getLibraryId() {
@@ -43,5 +47,13 @@ public class Library {
 
     public void setBooksToScanDays(Integer booksToScanDays) {
         this.booksToScanDays = booksToScanDays;
+    }
+
+    public List<Book> getBooks() {
+        return books;
+    }
+
+    public void setBooks(List<Book> books) {
+        this.books = books;
     }
 }
