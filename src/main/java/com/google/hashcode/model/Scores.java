@@ -3,17 +3,17 @@ package com.google.hashcode.model;
 import java.util.List;
 
 public class Scores {
-    private List<Integer> scores;
+    private List<Book> books;
 
-    public Scores(List<Integer> scores) {
-        this.scores = scores;
+    public Scores(List<Book> books) {
+        this.books = books;
     }
 
-    public List<Integer> getScores() {
-        return scores;
+    public List<Book> getBooks() {
+        return books;
     }
 
-    public void setScores(List<Integer> scores) {
-        this.scores = scores;
+    public void setBooks(List<Book> books) {
+        this.books = books;
     }
 }
