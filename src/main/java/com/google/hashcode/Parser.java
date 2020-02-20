@@ -13,16 +13,23 @@ import java.util.List;
 import java.util.Map;
 
 public class Parser {
+//    private String input = "a_example.txt";
+    private String input = "b_read_on.txt";
+//    private String input = "c_incunabula.txt";
+//    private String input = "d_tough_choices.txt";
+//    private String input = "e_so_many_books.txt";
+
+
+
     private Map<Integer, Integer> scores = new HashMap<>();
     private Summary summary;
     private List<Library> libraries;
 
-    public void main(String[] args) {
-        Parser parser = new Parser();
-        parser.readFile("a_example.txt");
+    public void execute() {
+        readFile(input);
 
         LibraryService libraryService = new LibraryService();
-        libraryService.storeList(this.libraries, this.scores);
+        libraryService.storeList(libraries, this.scores);
     }
 
     public void readFile(String file)
