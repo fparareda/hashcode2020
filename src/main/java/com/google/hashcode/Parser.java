@@ -45,11 +45,6 @@ public class Parser {
             numberOfLibraries = Integer.parseInt(valuesFirstLine[1]);
             numberOfDays = Integer.parseInt(valuesFirstLine[2]);
 
-            System.out.println("numberOfBooks " + numberOfBooks);
-            System.out.println("numberOfLibraries " + numberOfLibraries);
-            System.out.println("numberOfDays " + numberOfDays);
-
-
             String secondLine = lines.get(1);
             String[] valuesSecondLine = secondLine.split(" ");
             List<Book> books = new ArrayList<>();
