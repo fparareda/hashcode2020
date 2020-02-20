@@ -2,29 +2,32 @@ package com.google.hashcode;
 
 import com.google.hashcode.model.Book;
 import com.google.hashcode.model.Library;
-import com.google.hashcode.model.Scores;
+import com.google.hashcode.model.Summary;
+import com.google.hashcode.service.LibraryService;
 
 import java.io.*;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Parser {
+    private Map<Integer, Integer> scores = new HashMap<>();
+    private Summary summary;
+    private List<Library> libraries;
 
-    int numberOfBooks;
-    int numberOfLibraries;
-    int numberOfDays;
-
-    Scores scoresObj;
-    List<Library> libraries = new ArrayList<>();
-
-    public static void main(String[] args) {
+    public void main(String[] args) {
         Parser parser = new Parser();
         parser.readFile("a_example.txt");
+
+        LibraryService libraryService = new LibraryService();
+        libraryService.storeList(this.libraries, this.scores);
     }
 
-    void readFile(String file)
+    public void readFile(String file)
     {
+        libraries = new ArrayList<>();
         try {
 
             File f = getFileFromResources(file);
@@ -41,19 +44,19 @@ public class Parser {
             String firstLine = lines.get(0);
             String[] valuesFirstLine = firstLine.split(" ");
 
-            numberOfBooks = Integer.parseInt(valuesFirstLine[0]);
-            numberOfLibraries = Integer.parseInt(valuesFirstLine[1]);
-            numberOfDays = Integer.parseInt(valuesFirstLine[2]);
+            int numberOfLibraries = Integer.parseInt(valuesFirstLine[1]);
+
+            summary = new Summary(
+                    Integer.parseInt(valuesFirstLine[0]),
+                    Integer.parseInt(valuesFirstLine[1]),
+                    Integer.parseInt(valuesFirstLine[2])
+                    );
 
             String secondLine = lines.get(1);
             String[] valuesSecondLine = secondLine.split(" ");
             List<Book> books = new ArrayList<>();
             for(int i = 0 ; i < valuesSecondLine.length ; i++)
-            {
-                Book book = new Book(i, Integer.parseInt(valuesSecondLine[i]));
-                books.add(book);
-            }
-            scoresObj = new Scores(books);
+                scores.put(i, Integer.parseInt(valuesSecondLine[i]));
 
             int line = 2;
             for(int libraryId = 0 ; libraryId < numberOfLibraries ; libraryId++)
@@ -84,6 +87,23 @@ public class Parser {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+
+    public Map<Integer, Integer> getScores() {
+        return scores;
+    }
+
+    public void setScores(Map<Integer, Integer> scores) {
+        this.scores = scores;
+    }
+
+    public List<Library> getLibraries() {
+        return libraries;
+    }
+
+    public void setLibraries(List<Library> libraries) {
+        this.libraries = libraries;
     }
 
     private File getFileFromResources(String fileName) {
