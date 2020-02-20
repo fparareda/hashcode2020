@@ -1,14 +1,24 @@
 package com.google.hashcode.model;
 
 public class Library {
+    private Integer libraryId;
     private Integer numBooks;
     private Integer signupDays;
     private Integer booksToScanDays;
 
-    public Library(Integer numBooks, Integer signupDays, Integer booksToScanDays) {
+    public Library(Integer libraryId, Integer numBooks, Integer signupDays, Integer booksToScanDays) {
+        this.libraryId = libraryId;
         this.numBooks = numBooks;
         this.signupDays = signupDays;
         this.booksToScanDays = booksToScanDays;
+    }
+
+    public Integer getLibraryId() {
+        return libraryId;
+    }
+
+    public void setLibraryId(Integer libraryId) {
+        this.libraryId = libraryId;
     }
 
     public Integer getNumBooks() {
