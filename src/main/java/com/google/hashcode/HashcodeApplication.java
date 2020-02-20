@@ -22,7 +22,7 @@ public class HashcodeApplication implements CommandLineRunner {
 		Parser parser = new Parser();
 
 		for (String input : inputFiles) {
-			parser.execute(input + ".txt", input + "_output.txt");
+			parser.execute(input + ".txt", input + "_output_2.txt");
 		}
 	}
 }

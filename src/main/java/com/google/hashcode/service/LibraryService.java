@@ -8,8 +8,8 @@ import java.util.stream.Collectors;
 
 public class LibraryService {
     private final static Double SCORING_NUM_BOOKS = 0.1;
-    private final static Double SCORING_SIGNUP_DAYS = 0.2;
-    private final static Double SCORING_SCAN_DAYS = 0.7;
+    private final static Double SCORING_SIGNUP_DAYS = 0.9;
+    private final static Double SCORING_SCAN_DAYS = 0.9;
     private List<Integer> booksInTotal = new ArrayList<>();
 
     public void storeList(String output, List<Library> libraries, Map<Integer, Integer> scores) {
@@ -17,20 +17,9 @@ public class LibraryService {
         Map<Integer, List<Integer>> map = new HashMap<>();
         List<LibraryScoring> librariesSorted = getListScoring(libraries, scores);
         for(LibraryScoring libraryScoring : librariesSorted) {
-            map.put(libraryScoring.getLibraryId(), addOnlyNotInserted(libraryScoring.getOrderedBooks()));
+            map.put(libraryScoring.getLibraryId(), libraryScoring.getOrderedBooks());
         }
         writer.print(map);
-    }
-
-    private List<Integer> addOnlyNotInserted(List<Integer> booksToSubmit) {
-        List<Integer> result = new ArrayList<>();
-        for (Integer bookId : booksToSubmit) {
-            if(!booksInTotal.contains(bookId)){
-                result.add(bookId);
-                booksInTotal.add(bookId);
-            }
-        }
-        return result;
     }
 
     public List<LibraryScoring> getListScoring(List<Library> libraries, Map<Integer, Integer> scores){
@@ -41,7 +30,7 @@ public class LibraryService {
         Collections.sort(orderedLibraries, new Comparator<LibraryScoring>() {
             @Override
             public int compare(LibraryScoring b1, LibraryScoring b2) {
-                return b1.getScoring().compareTo(b2.getScoring());
+                return b2.getScoring().compareTo(b1.getScoring());
             }
         });
         return orderedLibraries;
