@@ -20,14 +20,14 @@ public class Parser {
 
     public static void main(String[] args) {
         Parser parser = new Parser();
-        parser.readFile();
+        parser.readFile("a_example.txt");
     }
 
-    void readFile()
+    void readFile(String file)
     {
         try {
 
-            File f = getFileFromResources("a_example.txt");
+            File f = getFileFromResources(file);
 
             BufferedReader b = new BufferedReader(new FileReader(f));
 
@@ -85,8 +85,6 @@ public class Parser {
                 libraries.add(library);
                 line = line+2;
             }
-
-            System.out.println();
 
         } catch (IOException e) {
             e.printStackTrace();
