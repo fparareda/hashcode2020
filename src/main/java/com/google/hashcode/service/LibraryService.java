@@ -11,8 +11,8 @@ public class LibraryService {
     private final static Double SCORING_SIGNUP_DAYS = 0.2;
     private final static Double SCORING_SCAN_DAYS = 0.7;
 
-    public void storeList(List<Library> libraries, Map<Integer, Integer> scores) {
-        Writer writer = new Writer("result.txt");
+    public void storeList(String output, List<Library> libraries, Map<Integer, Integer> scores) {
+        Writer writer = new Writer(output);
         Map<Integer, List<Integer>> map = new HashMap<>();
         List<LibraryScoring> librariesSorted = getListScoring(libraries, scores);
         for(LibraryScoring libraryScoring : librariesSorted) {
